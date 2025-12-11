@@ -18,17 +18,44 @@ pipeline {
         stage('Installation') {
             steps {
                 echo 'Installation des dépendances avec Poetry'
-                dir('test-sonarqube') {
+                dir('tp2') {
                     bat 'poetry install'
                 }
             }
         }
 
-        stage('Tests') {
+        stage('Tests Unitaires') {
             steps {
-                echo 'Lancement des tests'
-                dir('test-sonarqube') {
-                    bat 'poetry run pytest'
+                echo 'Lancement des tests unitaires'
+                dir('tp2') {
+                    bat 'poetry run pytest tests/unit/ -v'
+                }
+            }
+        }
+
+        stage('Tests Integration') {
+            steps {
+                echo 'Lancement des tests d\'intégration'
+                dir('tp2') {
+                    bat 'poetry run pytest tests/integration/ -v'
+                }
+            }
+        }
+
+        stage('Tests Fonctionnels') {
+            steps {
+                echo 'Lancement des tests fonctionnels'
+                dir('tp2') {
+                    bat 'poetry run pytest tests/functional/ -v'
+                }
+            }
+        }
+
+        stage('Couverture de code') {
+            steps {
+                echo 'Génération du rapport de couverture'
+                dir('tp2') {
+                    bat 'poetry run pytest --cov=src --cov-report=html --cov-report=term'
                 }
             }
         }
