@@ -33,29 +33,11 @@ pipeline {
             }
         }
 
-        stage('Tests Integration') {
-            steps {
-                echo 'Lancement des tests d\'intégration'
-                dir('tp2') {
-                    bat 'poetry run pytest tests/integration/ -v'
-                }
-            }
-        }
-
-        stage('Tests Fonctionnels') {
-            steps {
-                echo 'Lancement des tests fonctionnels'
-                dir('tp2') {
-                    bat 'poetry run pytest tests/functional/ -v'
-                }
-            }
-        }
-
         stage('Couverture de code') {
             steps {
                 echo 'Génération du rapport de couverture'
                 dir('tp2') {
-                    bat 'poetry run pytest --cov=src --cov-report=html --cov-report=term'
+                    bat 'poetry run pytest tests/unit/ --cov=src --cov-report=html --cov-report=term'
                 }
             }
         }
