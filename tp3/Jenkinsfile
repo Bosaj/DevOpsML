@@ -1,16 +1,35 @@
-pipeline{
+pipeline {
     agent any
 
-    stages{
-        stage('Hello'){
-            steps{
-                echo 'Hello depuis un pipeline declaratif'
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello depuis un pipeline déclaratif'
             }
         }
-        stage('Info envirennement'){
-            steps{
-                echo "Nom de noeud Jenkis : ${env.NODE_NAME}"
+
+        stage('Infos environnement') {
+            steps {
+                echo "Nom du noeud Jenkins: ${env.NODE_NAME}"
                 echo "Workspace: ${env.WORKSPACE}"
+            }
+        }
+
+        stage('Installation') {
+            steps {
+                echo 'Installation des dépendances avec Poetry'
+                dir('test-sonarqube') {
+                    bat 'poetry install'
+                }
+            }
+        }
+
+        stage('Tests') {
+            steps {
+                echo 'Lancement des tests'
+                dir('test-sonarqube') {
+                    bat 'poetry run pytest'
+                }
             }
         }
     }
