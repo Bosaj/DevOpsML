@@ -1,13 +1,15 @@
 [project]
 name = "tp2"
 version = "0.1.0"
-description = ""
+description = "TP2 - DevOps testing with pytest"
 authors = [
-    {name = "Bosaj",email = "oussousselhadji@gmail.com"}
+    {name = "Bosaj", email = "oussousselhadji@gmail.com"}
 ]
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "flask>=3.0.3"
+]
 
 [tool.poetry]
 packages = [{include = "src"}]
@@ -18,9 +20,14 @@ build-backend = "poetry.core.masonry.api"
 
 [dependency-groups]
 test = [
-    "pytest (>=8.4.2,<9.0.0)",
-    "pytest-cov (>=7.0.0,<8.0.0)"
+    "pytest>=8.4.2,<9.0.0",
+    "pytest-cov>=7.0.0,<8.0.0"
 ]
 
 [tool.pytest.ini_options]
 pythonpath = "src"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v"
