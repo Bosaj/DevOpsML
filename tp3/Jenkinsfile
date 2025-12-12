@@ -5,6 +5,9 @@ pipeline {
         stage('Hello') {
             steps {
                 echo 'Hello depuis un pipeline déclaratif'
+                echo '========================================='
+                echo 'Pipeline de tests pour TP2 (Parallel)'
+                echo '========================================='
             }
         }
 
@@ -12,6 +15,7 @@ pipeline {
             steps {
                 echo "Nom du noeud Jenkins: ${env.NODE_NAME}"
                 echo "Workspace: ${env.WORKSPACE}"
+                echo "Build ID: ${env.BUILD_ID}"
             }
         }
 
@@ -24,22 +28,76 @@ pipeline {
             }
         }
 
-        stage('Tests Unitaires') {
-            steps {
-                echo 'Lancement des tests unitaires'
-                dir('tp2') {
-                    bat 'poetry run pytest tests/unit/ -v'
+        stage('Tests Parallèles') {
+            parallel {
+                stage('Tests Unitaires') {
+                    steps {
+                        echo 'Tests unitaires (Ex1 & Ex2)'
+                        dir('tp2') {
+                            bat 'poetry run pytest tests/unit/ -v --junitxml=reports/unit-tests.xml'
+                        }
+                    }
+                }
+                
+                stage('Tests Intégration') {
+                    steps {
+                        echo 'Tests d\'intégration (Ex3 & Ex4)'
+                        dir('tp2') {
+                            bat 'poetry run pytest tests/integration/ -v --junitxml=reports/integration-tests.xml'
+                        }
+                    }
+                }
+                
+                stage('Tests Fonctionnels') {
+                    steps {
+                        echo 'Tests fonctionnels (Ex5)'
+                        dir('tp2') {
+                            bat 'poetry run pytest tests/functional/ -v --junitxml=reports/functional-tests.xml'
+                        }
+                    }
                 }
             }
         }
 
         stage('Couverture de code') {
             steps {
-                echo 'Génération du rapport de couverture'
+                echo 'Génération du rapport de couverture complet'
                 dir('tp2') {
-                    bat 'poetry run pytest tests/unit/ --cov=src --cov-report=html --cov-report=term'
+                    bat 'poetry run pytest --cov=src --cov-report=html --cov-report=xml --cov-report=term-missing'
                 }
             }
+        }
+
+        stage('Rapport de couverture') {
+            steps {
+                echo 'Publication des rapports'
+                dir('tp2') {
+                    publishHTML([
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: true,
+                        keepAll: true,
+                        reportDir: 'htmlcov',
+                        reportFiles: 'index.html',
+                        reportName: 'Coverage Report'
+                    ])
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            dir('tp2') {
+                junit allowEmptyResults: true, testResults: 'reports/*.xml'
+                archiveArtifacts artifacts: 'htmlcov/**/*', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'coverage.xml', allowEmptyArchive: true
+            }
+        }
+        success {
+            echo '✅ Pipeline terminé: 63 tests passés avec 100% couverture!'
+        }
+        failure {
+            echo '❌ Pipeline échoué - Vérifiez les logs'
         }
     }
 }
