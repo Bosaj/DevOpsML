@@ -1,16 +1,21 @@
 FROM python:3.11-slim
 
-# Définir le répertoire de travail
 WORKDIR /app
 
-# Copier les fichiers nécessaires
-COPY app.py .
+# Copy requirements first for better caching
+COPY requirements.txt .
 
-# Installer Flask
-RUN pip install --no-cache-dir flask
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Exposer le port
+# Copy the rest of the application
+COPY . .
+
+# Create directory for database
+RUN mkdir -p instance
+
+# Expose port
 EXPOSE 5000
 
-# Lancer l'application
+# Run the application
 CMD ["python", "app.py"]

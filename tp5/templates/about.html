@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="fas fa-info-circle"></i> About This Application</h1>
+</div>
+
+<div class="content-section">
+    <h2>Project Overview</h2>
+    <p>This is a full-stack web application developed as part of TP5 - Docker exercise. It demonstrates the integration of multiple technologies and best practices in modern web development.</p>
+    
+    <h2>Technologies Used</h2>
+    <div class="tech-grid">
+        <div class="tech-item">
+            <i class="fab fa-python"></i>
+            <h3>Python 3.11</h3>
+            <p>Backend programming language</p>
+        </div>
+        <div class="tech-item">
+            <i class="fas fa-flask"></i>
+            <h3>Flask</h3>
+            <p>Lightweight web framework</p>
+        </div>
+        <div class="tech-item">
+            <i class="fas fa-database"></i>
+            <h3>SQLAlchemy</h3>
+            <p>SQL toolkit and ORM</p>
+        </div>
+        <div class="tech-item">
+            <i class="fab fa-docker"></i>
+            <h3>Docker</h3>
+            <p>Containerization platform</p>
+        </div>
+        <div class="tech-item">
+            <i class="fab fa-html5"></i>
+            <h3>HTML5</h3>
+            <p>Markup language</p>
+        </div>
+        <div class="tech-item">
+            <i class="fab fa-css3-alt"></i>
+            <h3>CSS3</h3>
+            <p>Styling and layout</p>
+        </div>
+    </div>
+    
+    <h2>Features</h2>
+    <ul class="feature-list">
+        <li><i class="fas fa-check"></i> User management system (CRUD operations)</li>
+        <li><i class="fas fa-check"></i> Contact form with database storage</li>
+        <li><i class="fas fa-check"></i> RESTful API endpoints</li>
+        <li><i class="fas fa-check"></i> SQLite database integration</li>
+        <li><i class="fas fa-check"></i> Responsive design</li>
+        <li><i class="fas fa-check"></i> Flash messaging system</li>
+        <li><i class="fas fa-check"></i> Docker containerization</li>
+        <li><i class="fas fa-check"></i> Error handling (404 pages)</li>
+    </ul>
+    
+    <h2>API Endpoints</h2>
+    <div class="api-section">
+        <div class="api-endpoint">
+            <span class="method">GET</span>
+            <code>/api/users</code>
+            <p>Returns all users in JSON format</p>
+        </div>
+        <div class="api-endpoint">
+            <span class="method">GET</span>
+            <code>/api/stats</code>
+            <p>Returns application statistics</p>
+        </div>
+    </div>
+    
+    <h2>Project Structure</h2>
+    <pre><code>tp5/
+├── app.py                 # Main application file
+├── Dockerfile             # Docker configuration
+├── docker-compose.yml     # Docker Compose setup
+├── requirements.txt       # Python dependencies
+├── templates/             # HTML templates
+│   ├── base.html
+│   ├── home.html
+│   ├── about.html
+│   ├── contact.html
+│   ├── users.html
+│   ├── messages.html
+│   └── 404.html
+└── static/               # Static files
+    ├── css/
+    │   └── style.css
+    └── js/
+        └── main.js</code></pre>
+</div>
+{% endblock %}

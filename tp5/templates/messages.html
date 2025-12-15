@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Messages{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="fas fa-envelope"></i> Contact Messages</h1>
+    <p>View all messages received from the contact form</p>
+</div>
+
+<div class="table-container">
+    <h2>All Messages ({{ messages|length }})</h2>
+    
+    {% if messages %}
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Date Received</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for message in messages %}
+            <tr>
+                <td>{{ message.id }}</td>
+                <td><i class="fas fa-user"></i> {{ message.name }}</td>
+                <td>{{ message.email }}</td>
+                <td class="message-text">{{ message.message }}</td>
+                <td>{{ message.date_sent.strftime('%Y-%m-%d %H:%M') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state">
+        <i class="fas fa-inbox"></i>
+        <p>No messages received yet.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

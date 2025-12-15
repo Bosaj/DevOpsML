@@ -1,26 +1,71 @@
-# TP Docker - Application Flask
+# Flask Docker Application - TP5
 
-Application Flask simple containerisée avec Docker.
+A comprehensive full-stack web application built with Flask, SQLAlchemy, and Docker.
 
-## Prérequis
-- Docker installé
+## Features
 
-## Instructions
+- User management system (CRUD operations)
+- Contact form with database storage
+- RESTful API endpoints
+- SQLite database integration
+- Responsive design
+- Flash messaging system
+- Docker containerization
 
-### Construire l'image
-docker build -t hello-tp .
+## Technologies
+
+- Python 3.11
+- Flask 3.0
+- SQLAlchemy
+- SQLite
+- Docker
+- HTML5/CSS3
+- JavaScript
+
+## Installation
+
+### Using Docker (Recommended)
+
+Build and run with docker-compose
+docker-compose up --build
+
+Or build manually
+docker build -t flask-app .
+docker run -d -p 5000:5000 --name flask-app flask-app
 
 text
 
-### Lancer le conteneur
-docker run -d -p 5000:5000 --name hello hello-tp
+### Manual Installation
+
+Install dependencies
+pip install -r requirements.txt
+
+Run the application
+python app.py
 
 text
 
-### Accéder à l'application
-Ouvrez votre navigateur sur http://localhost:5000
+## Usage
 
-### Arrêter et supprimer
-docker stop hello
-docker rm hello
-docker rmi hello-tp
+Access the application at `http://localhost:5000`
+
+### API Endpoints
+
+- `GET /api/users` - Get all users in JSON format
+- `GET /api/stats` - Get application statistics
+
+## Project Structure
+
+tp5/
+├── app.py
+├── Dockerfile
+├── docker-compose.yml
+├── requirements.txt
+├── templates/
+└── static/
+
+text
+
+## Author
+
+TP5 Docker Exercise - 2025

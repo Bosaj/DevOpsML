@@ -3,10 +3,15 @@ __pycache__/
 *$py.class
 *.so
 .Python
+env/
 venv/
+ENV/
+instance/
 .env
+*.db
+*.sqlite
+.DS_Store
 .vscode/
 .idea/
-*.swp
-*.swo
+
 *.tar
