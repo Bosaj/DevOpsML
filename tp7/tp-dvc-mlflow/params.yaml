@@ -1,0 +1,17 @@
+seed: 42
+
+dataset:
+  url: "https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data"
+  raw_filename: "adult.csv"
+
+preprocess:
+  drop_missing: true
+  drop_duplicates: true
+  normalize_numeric: true
+  categorical_encoding: "onehot"
+
+split:
+  train_ratio: 0.7
+  val_ratio: 0.15
+  test_ratio: 0.15
+  stratify: true

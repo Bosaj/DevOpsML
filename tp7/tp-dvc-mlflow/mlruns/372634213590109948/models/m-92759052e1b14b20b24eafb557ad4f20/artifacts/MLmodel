@@ -1,0 +1,22 @@
+artifact_path: file:C:/Users/ROG FLOW/Desktop/ENIAD/Semestre/Semestre_9/DevOps_&_MLops/TP/DevOpsML/tp7/tp-dvc-mlflow/mlruns/372634213590109948/models/m-92759052e1b14b20b24eafb557ad4f20/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.12.10
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.4.2
+mlflow_version: 3.8.0
+model_id: m-92759052e1b14b20b24eafb557ad4f20
+model_size_bytes: 4702
+model_uuid: m-92759052e1b14b20b24eafb557ad4f20
+prompts: null
+run_id: e814bc7b61304d9591e6fcd84ad13e54
+utc_time_created: '2025-12-22 10:48:04.242145'

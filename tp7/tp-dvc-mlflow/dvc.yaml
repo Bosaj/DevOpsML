@@ -1,0 +1,26 @@
+stages:
+  download:
+    cmd: python src/data/download.py
+    outs:
+      - data/raw/adult.csv
+
+  preprocess:
+    cmd: python src/data/preprocess.py
+    deps:
+      - data/raw/adult.csv
+    params:
+      - preprocess
+    outs:
+      - data/processed/adult_clean.csv
+
+  split:
+    cmd: python src/data/split.py
+    deps:
+      - data/processed/adult_clean.csv
+    params:
+      - seed
+      - split
+    outs:
+      - data/splits/train.csv
+      - data/splits/val.csv
+      - data/splits/test.csv

@@ -1,0 +1,10 @@
+artifact_location: file:C:/Users/ROG FLOW/Desktop/ENIAD/Semestre/Semestre_9/DevOps_&_MLops/TP/DevOpsML/tp7/tp-dvc-mlflow/mlruns/372634213590109948/models/m-92759052e1b14b20b24eafb557ad4f20/artifacts
+creation_timestamp: 1766400484177
+experiment_id: '372634213590109948'
+last_updated_timestamp: 1766400494328
+model_id: m-92759052e1b14b20b24eafb557ad4f20
+model_type: null
+name: model
+source_run_id: e814bc7b61304d9591e6fcd84ad13e54
+status: 2
+status_message: null
