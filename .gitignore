@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*.pyo
+.coverage
+htmlcov/
+coverage.xml
+.pytest_cache/
+.sonar/
+*.egg-info/
+.venv/
+venv/
+dist/
+build/
+mlruns/
+*.log

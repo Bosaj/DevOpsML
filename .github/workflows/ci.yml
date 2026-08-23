@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  tp2-tests:
+    name: tp2 - pytest (unit/integration/functional)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install flask pytest pytest-cov
+      - name: Run test suite
+        working-directory: tp2
+        run: python -m pytest -v --cov=src
+
+  tp4-tests:
+    name: tp4 - pytest (SonarQube-scanned Calculator)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install pytest pytest-cov coverage
+      - name: Run test suite
+        working-directory: tp4/test-sonarqube
+        run: python -m pytest -v --cov=src
+
+  lint-and-syntax:
+    name: Syntax check (tp1, tp5, tp7)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install flake8
+        run: pip install flake8
+      - name: Byte-compile check
+        run: |
+          python -m py_compile tp1_git_intro/main.py
+          python -m py_compile tp5/app.py
+          find tp7/tp-dvc-mlflow/src -name "*.py" -print0 | xargs -0 -n1 python -m py_compile
+      - name: Flake8 (critical errors only)
+        run: |
+          flake8 tp1_git_intro tp5 tp7/tp-dvc-mlflow/src --select=E9,F63,F7,F82 --show-source
