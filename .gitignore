@@ -24,3 +24,6 @@ mlruns/
 *.env
 .wiki-staging
 temp_*
+
+# Environment & Security Exclusions
+.env.*.local
