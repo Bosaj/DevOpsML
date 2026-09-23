@@ -13,7 +13,6 @@
 
 ---
 
-![CI](https://github.com/Bosaj/DevOpsML/actions/workflows/ci.yml/badge.svg)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Python](https://img.shields.io/badge/python-3.12-blue.svg)
 
@@ -60,7 +59,7 @@ cd tp7/tp-dvc-mlflow && pip install pandas scikit-learn mlflow joblib pyyaml && 
 
 ## Testing / CI
 
-[`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs on every push to `main`:
+[`.github/workflows/ci_qa_monitoring.yml`](.github/workflows/ci_qa_monitoring.yml) runs on every push to `main`:
 - The real `tp2` pytest suite (unit, integration, functional)
 - The real `tp4` pytest suite for the SonarQube-scanned `Calculator`
 - A Python syntax/import sanity check across the remaining labs (`tp1`, `tp5`, `tp7`)
