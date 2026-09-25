@@ -1,17 +1,21 @@
 from __future__ import annotations
+
 from pathlib import Path
 
-import yaml
 import pandas as pd
+import yaml
 from sklearn.model_selection import train_test_split
+
 
 def load_params(path: str = "params.yaml") -> dict:
     with open(path, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
 
+
 def dist(series: pd.Series) -> dict:
     vc = series.value_counts(normalize=True)
     return {str(k): float(v) for k, v in vc.items()}
+
 
 def main() -> None:
     params = load_params()
@@ -31,7 +35,9 @@ def main() -> None:
     df = pd.read_csv(in_path)
 
     if "income" not in df.columns:
-        raise ValueError("Target column 'income' not found. Check preprocessing output.")
+        raise ValueError(
+            "Target column 'income' not found. Check preprocessing output."
+        )
 
     X = df.drop(columns=["income"])
     y = df["income"]
@@ -78,6 +84,7 @@ def main() -> None:
     print(f"[split] val   class dist: {dist(val_df['income'])}")
     print(f"[split] test  class dist: {dist(test_df['income'])}")
     print(f"[split] Saved: {train_path}, {val_path}, {test_path}")
+
 
 if __name__ == "__main__":
     main()

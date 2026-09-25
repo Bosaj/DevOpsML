@@ -1,14 +1,17 @@
 from __future__ import annotations
+
 from pathlib import Path
 
-import yaml
 import numpy as np
 import pandas as pd
+import yaml
 from sklearn.preprocessing import StandardScaler
+
 
 def load_params(path: str = "params.yaml") -> dict:
     with open(path, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
+
 
 def main() -> None:
     params = load_params()
@@ -41,6 +44,7 @@ def main() -> None:
 
     df.to_csv(out_path, index=False)
     print("[preprocess] saved cleaned dataset to", out_path)
+
 
 if __name__ == "__main__":
     main()
