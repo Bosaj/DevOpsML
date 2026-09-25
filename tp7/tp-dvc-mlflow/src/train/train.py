@@ -1,24 +1,24 @@
 from __future__ import annotations
 
-from pathlib import Path
 import json
-
-import yaml
-import pandas as pd
-
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score
+from pathlib import Path
 
 import joblib
 import mlflow
 import mlflow.sklearn
+import pandas as pd
+import yaml
+from sklearn.compose import ColumnTransformer
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder
+
 
 def load_params(path: str = "params.yaml") -> dict:
     with open(path, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
+
 
 def main() -> None:
     params = load_params()
@@ -78,6 +78,7 @@ def main() -> None:
         print("[train] test_accuracy =", float(acc))
         print("[train] saved model:", model_path)
         print("[train] saved metrics:", metrics_path)
+
 
 if __name__ == "__main__":
     main()

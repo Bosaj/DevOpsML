@@ -1,8 +1,11 @@
 """
 Exercise 5: Flask web application
 """
-from flask import Flask, jsonify, request
+
 from uuid import uuid4
+
+from flask import Flask, jsonify, request
+
 
 def create_app(config: dict | None = None) -> Flask:
     app = Flask(__name__)
