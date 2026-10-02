@@ -3,8 +3,8 @@ message: "If you use this software, please cite it using the metadata from this 
 title: "Devopsml"
 abstract: "Production MLOps & DevOps Pipeline for Automated Model Packaging, CI/CD, and Containerization."
 authors:
-  - family-names: "Oussous"
-    given-names: "El Hadji"
+  - family-names: "EL HADJI"
+    given-names: "Oussama"
     alias: "Bosaj"
     email: "oussousselhadji@gmail.com"
 repository-code: "https://github.com/Bosaj/DevOpsML"
