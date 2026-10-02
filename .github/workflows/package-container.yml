@@ -41,12 +41,15 @@ jobs:
         id: build
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./tp5
+          file: ./tp5/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Generate Artifact Attestation
+        if: ${{ !github.event.repository.private }}
+        continue-on-error: true
         uses: actions/attest-build-provenance@v2
         with:
           subject-name: ghcr.io/${{ github.repository }}
