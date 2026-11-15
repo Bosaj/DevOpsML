@@ -20,18 +20,21 @@ jobs:
         if: hashFiles('monitoring/logger.py') != '' || hashFiles('scripts/eval_harness.py') != ''
         uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.11"
 
       - name: Install Python Base Dependencies
         if: hashFiles('monitoring/logger.py') != '' || hashFiles('scripts/eval_harness.py') != ''
         run: |
           python -m pip install --upgrade pip
-          pip install pytest prometheus_client
+          pip install pytest prometheus_client ruff
+
+      - name: Lint Core Modules
+        run: |
+          python -m ruff check src/ monitoring/ scripts/ tests/
 
       - name: Run Pytest QA Suite
-        if: hashFiles('tests/test_monitoring_and_qa.py') != ''
         run: |
-          python -m pytest tests/test_monitoring_and_qa.py -v
+          python -m pytest tests/ -v
 
       - name: Run Evaluation Harness
         if: hashFiles('scripts/eval_harness.py') != ''

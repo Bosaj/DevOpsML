@@ -1,4 +1,45 @@
-from prometheus_client import Counter, Gauge, Histogram, start_http_server
+"""Prometheus and fallback in-memory metrics definitions for DevOpsML."""
+
+from __future__ import annotations
+
+try:
+    from prometheus_client import Counter, Gauge, Histogram, start_http_server
+except ImportError:  # pragma: no cover - local stdlib fallback when prometheus_client is absent
+
+    class _LabeledMetric:
+        def __init__(self, initial: float = 0.0) -> None:
+            self.value = initial
+            self.observations: list[float] = []
+
+        def inc(self, amount: float = 1.0) -> None:
+            self.value += amount
+
+        def observe(self, value: float) -> None:
+            self.observations.append(float(value))
+
+        def set(self, value: float) -> None:
+            self.value = float(value)
+
+    class _FallbackMetric:
+        def __init__(self, _name: str, _doc: str, labelnames: list[str] | None = None) -> None:
+            self.labelnames = labelnames or []
+            self._series: dict[tuple[tuple[str, str], ...], _LabeledMetric] = {}
+            self._root = _LabeledMetric()
+
+        def labels(self, **kwargs: str) -> _LabeledMetric:
+            key = tuple(sorted((k, str(v)) for k, v in kwargs.items()))
+            return self._series.setdefault(key, _LabeledMetric())
+
+        def set(self, value: float) -> None:
+            self._root.set(value)
+
+    Counter = _FallbackMetric
+    Gauge = _FallbackMetric
+    Histogram = _FallbackMetric
+
+    def start_http_server(port: int = 8000) -> None:
+        print(f"Fallback metrics exporter initialized for port {port}")
+
 
 # Metric Definitions for DevOpsML
 REQUEST_COUNT = Counter(
