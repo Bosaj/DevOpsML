@@ -15,7 +15,7 @@ def _require_non_empty(value: str, field_name: str) -> str:
 
 def _require_finite(value: float, field_name: str, minimum: float | None = None) -> float:
     if isinstance(value, bool) or not isinstance(value, (int, float)):
-        raise ValueError(f"{field_name} must be numeric.")
+        raise TypeError(f"{field_name} must be numeric.")
     numeric = float(value)
     if not math.isfinite(numeric):
         raise ValueError(f"{field_name} must be finite.")

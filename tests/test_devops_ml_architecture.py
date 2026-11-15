@@ -21,7 +21,11 @@ from src.devops_ml.orchestrator import (
     ServiceContainer,
     resolve_execution_order,
 )
-from src.devops_ml.profiler import InMemoryMetricsSink, LatencyProfiler, run_synthetic_load
+from src.devops_ml.profiler import (
+    InMemoryMetricsSink,
+    LatencyProfiler,
+    run_synthetic_load,
+)
 from src.devops_ml.registry import ModelArtifactRegistry, compute_bytes_sha256
 
 

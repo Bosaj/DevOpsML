@@ -6,8 +6,8 @@ import math
 import threading
 import time
 from collections import defaultdict
+from collections.abc import Callable, Iterator
 from contextlib import contextmanager
-from typing import Callable, Iterator
 
 from src.devops_ml.contracts import LatencyProfile
 

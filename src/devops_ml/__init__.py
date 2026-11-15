@@ -13,7 +13,11 @@ from src.devops_ml.contracts import (
     StageRunner,
 )
 from src.devops_ml.orchestrator import PipelineOrchestrator, ServiceContainer
-from src.devops_ml.profiler import InMemoryMetricsSink, LatencyProfiler, run_synthetic_load
+from src.devops_ml.profiler import (
+    InMemoryMetricsSink,
+    LatencyProfiler,
+    run_synthetic_load,
+)
 from src.devops_ml.registry import ModelArtifactRegistry
 
 __all__ = [
